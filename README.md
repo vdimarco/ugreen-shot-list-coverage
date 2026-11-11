@@ -12,6 +12,7 @@ Shot List Coverage is a UGOS Skill for photographers. It compares a client shot 
 | `dist/shot-list-coverage.zip` | The Pre-test Skill Package for Round 1 |
 | `proposal/` | The Round 1 Project Proposal (Markdown source and PDF) |
 | `demo/` | Demo kit: shot list, props to print, capture plan, smoke test photos, expected results, and a scoring script. Start with `demo/test-plan.md`. |
+| `demo/generated/` | A ready-made test shoot: 53 AI-generated photos of fictional people, with EXIF capture times and a manifest |
 
 ## Workflow
 

@@ -15,6 +15,7 @@ This plan is for the assigned test day on the UGREEN AI NAS (Nov 22 to 28). All 
 | `expected/expected-edge.csv` | Expected results for the edge run |
 | `score_report.py` | Compares a coverage report with an expected file |
 | `generate.py` | Makes the shot lists, props, smoke photos, and expected files again |
+| `generated/` | A ready-made, AI-generated test shoot: 53 photos with EXIF times, a manifest, and 4 character portraits |
 
 ## Test 0: smoke test (first, about 15 minutes)
 
@@ -35,6 +36,8 @@ Expected: 6 of 6 pass. Shot 3 must be weak (out of focus), and missing is also a
 `smoke-manifest.csv` lists the content and capture time of each synthetic photo, so you can check the best frames.
 
 ## Test 1 (core): full shoot coverage
+
+Use the staged shoot from `capture-plan.md`, or the generated shoot in `generated/photos/` (53 photos). The expected results are the same for both. For the generated shoot, name the faces with the portraits in `generated/characters/`, and expect step 1 to count 53 images.
 
 1. Upload the full shoot to `Photos/2026-11 Rivera-Okoro party` and the shot list PDF to `Documents`.
 2. In the photo app, name the faces: Ana Rivera, Daniel Okoro, Rosa Rivera, and Maya Chen.
@@ -70,7 +73,7 @@ Expected:
 ## Test 3 (edge case): closed eyes
 
 1. Make a copy of the shoot folder named `Photos/2026-11 Rivera-Okoro party edge`.
-2. In the copy only, remove the 12 eyes-open frames of shot 10. Use the file name from the capture plan.
+2. In the copy only, remove the eyes-open frames of shot 10. For the staged shoot, use the file name from the capture plan. For the generated shoot, remove `IMG_2027.jpg`, `IMG_2030.jpg`, and `IMG_2032.jpg`.
 3. Run the same request on the copy, with the event name "Edge run".
 
 Expected:
