@@ -11,6 +11,7 @@ Shot List Coverage is a UGOS Skill for photographers. It compares a client shot 
 | `shot-list-coverage/` | The Skill package: `SKILL.md` and `references/` |
 | `dist/shot-list-coverage.zip` | The Pre-test Skill Package for Round 1 |
 | `proposal/` | The Round 1 Project Proposal (Markdown source and PDF) |
+| `demo/` | Demo kit: shot list, props to print, capture plan, smoke test photos, expected results, and a scoring script. Start with `demo/test-plan.md`. |
 
 ## Workflow
 
@@ -31,3 +32,15 @@ rm -f dist/shot-list-coverage.zip && zip -qrX dist/shot-list-coverage.zip shot-l
 ```
 
 Last result: `static-pass`, 0 errors, 0 warnings.
+
+## Demo kit
+
+```bash
+python3 demo/generate.py
+```
+
+```bash
+python3 demo/score_report.py REPORT.md demo/expected/expected-full.csv
+```
+
+The generator needs Python with `reportlab`, `Pillow`, and `python-docx`. All names and events are fictional.

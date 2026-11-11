@@ -1,0 +1,7 @@
+shot,text,must_have,expected_status,also_ok,reason
+1,"Welcome sign ""Congratulations Ana & Daniel""",yes,covered,,"3 good frames, 1 cut off, 1 blurred."
+2,"Cake with the topper ""A & D""",yes,covered,,"4 good frames, 1 cut off."
+3,"Place card ""Table 4""",,weak,missing,All 4 frames are out of focus.
+4,Menu card on a plate,,missing,,No frame shows a menu card.
+5,Drone view of the house,,missing,,No frame shows the house from above.
+6,"String lights, wide",,covered,weak,3 frames show string lights on a wall.

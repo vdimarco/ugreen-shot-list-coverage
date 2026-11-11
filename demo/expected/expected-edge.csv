@@ -1,0 +1,21 @@
+shot,text,must_have,expected_status,also_ok,reason
+1,"Ana's ring, close-up on her hand",yes,covered,,
+2,"Flowers on the main table, wide",,covered,,
+3,"Welcome sign ""Congratulations Ana & Daniel""",,covered,,
+4,"Ana and Daniel together, full length",yes,covered,,
+5,Daniel with his parents,yes,missing,,Planned miss: the parents are not at the shoot.
+6,Guests arriving at the front door,,covered,,
+7,Daniel giving the toast,yes,covered,,
+8,Ana laughing during the toast,yes,covered,,
+9,"Glasses raised, close-up",,covered,,
+10,Ana with Grandma Rosa,yes,weak,,Only closed-eyes frames of Ana with Grandma Rosa are in the folder.
+11,"Cake with the topper ""A & D""",yes,covered,,
+12,Ana and Daniel cutting the cake,,covered,,
+13,First bite,,covered,,
+14,Kids at the dessert table,,missing,,Planned miss: no children at the shoot.
+15,"Place card ""Table 4""",,covered,,
+16,Menu card on a plate,,missing,,Planned miss: the photographer forgets this shot on purpose.
+17,"String lights at dusk, wide",,covered,,
+18,"Everyone together, group photo outside",yes,covered,,
+19,Ana with her best friend Maya,,covered,,
+20,Drone view of the house,,missing,,Planned miss: no drone.
