@@ -10,6 +10,7 @@ Shot List Coverage is a UGOS Skill for photographers. It compares a client shot 
 |---|---|
 | `shot-list-coverage/` | The Skill package: `SKILL.md` and `references/` |
 | `dist/shot-list-coverage.zip` | The Pre-test Skill Package for Round 1 |
+| `proposal/` | The Round 1 Project Proposal (Markdown source and PDF) |
 
 ## Workflow
 
