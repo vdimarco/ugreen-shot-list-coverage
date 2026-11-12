@@ -9,6 +9,7 @@ Copy each field into the Devpost project form. Round 1 closes Sunday, Nov 15, 20
 | Project Proposal (PDF) | `proposal/shot-list-coverage-proposal.pdf` | 37 KB, 2 pages, about 480 words | 1 MB, 500 words |
 | Pre-test Skill Package (ZIP) | `dist/shot-list-coverage.zip` | 7 KB, 4 files | 10 MB, 100 files, 1 MB per file |
 | Cover image (gallery) | `media/cover.png` | 3:2 | none |
+| Video demo link (optional) | `demo/video/shot-list-coverage-concept.mp4` | 97 s, 19 MB, 1080p | YouTube, Vimeo, or Youku link only |
 
 ## Project name
 
@@ -78,8 +79,32 @@ ugos, ugreen-ai-nas, uliya-skill-kit, markdown, claude
 
 - https://github.com/vdimarco/ugreen-shot-list-coverage
 
+## Video demo link
+
+Round 1 does not require a video. This concept preview is optional. It explains the idea with AI-generated photos and the expected results. It is not a recording on a UGREEN NAS, and every frame says so. Round 2 needs a new video recorded on your assigned NAS (see `demo/video/README.md`).
+
+Devpost does not accept a video file. Upload the video first, then paste the link:
+
+1. Upload `demo/video/shot-list-coverage-concept.mp4` to YouTube. Set it to Public or Unlisted.
+2. Use the title and description below.
+3. Paste the YouTube link into the Devpost field "Video demo link".
+
+**YouTube title**
+
+Shot List Coverage: concept preview (UGREEN Hackathon 2026 on AI NAS)
+
+**YouTube description**
+
+Shot List Coverage is a UGOS Skill for photographers. It checks a client's shot list against the photos of a shoot on a UGREEN AI NAS, and shows which shots are covered, weak, or missing, with the best frame for each.
+
+This video is a concept preview. The photos are AI-generated and the people are fictional. The report on screen is the expected result for the demo shoot. It is not a recording of the Skill on a UGREEN NAS. The final demo will be recorded on a UGREEN AI NAS in Round 2.
+
+Code and demo kit: https://github.com/vdimarco/ugreen-shot-list-coverage
+Entry for the UGREEN Hackathon 2026 on AI NAS, track Unleash Your Creativity.
+
 ## Before you submit
 
 - [ ] Check the entrant name in the proposal PDF ("Vaughn DiMarco"). Add teammates and their consent if you have any.
 - [ ] Confirm on the Devpost Rules tab that a team can enter more than one Skill.
 - [ ] Upload the PDF and the ZIP above.
+- [ ] Optional: upload the concept video to YouTube and paste the link into "Video demo link".
