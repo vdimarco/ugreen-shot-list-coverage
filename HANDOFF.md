@@ -41,10 +41,10 @@ Done in both repos:
 
 Not done (needs the user):
 
-1. Done (2026-11-12): the rules allow two entries per team. Both entries are being submitted.
-2. Check the entrant name "Vaughn DiMarco" in both proposals. Add teammates and their consent if any.
-3. Create the Devpost projects and upload the files in `SUBMISSION.md`.
-4. Optional: upload the concept videos to YouTube and paste the links into Devpost.
+1. Done (2026-11-12): the rules allow **one** Project per entrant. The Rules tab says, under "Multiple Submissions": "Each individual Entrant or Team may submit only one Project during the Hackathon." An earlier version of this line said two entries are allowed. That was wrong.
+2. Done (2026-11-12): Household Wiki is submitted on Devpost as an individual entry by Vaughn DiMarco, track "Explore Your Imagination" (the Devpost name for Open Innovation). It can be edited until the Round 1 deadline.
+3. Shot List Coverage is **not** submitted. Do not submit it as a second entry. To enter it, it must replace Household Wiki before the Round 1 deadline.
+4. Optional: upload a demo video to YouTube and paste the link into the Devpost entry. Each repo has a concept video and a motion-graphics video in `demo/video/`, and a clickable walkthrough in `demo/interactive/`.
 
 After Round 1, if selected:
 
