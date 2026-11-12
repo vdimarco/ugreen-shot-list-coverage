@@ -43,7 +43,7 @@ The Skill never moves, edits, deletes, or shares a photo.
 
 ### How we built it
 
-The Skill is one SKILL.md with two reference files, built with the UGREEN Skill Developer Package (uliya-skill-kit 0.7.3). It delegates self-contained tasks to four registered NAS experts:
+The Skill is one SKILL.md with three reference files, built with the UGREEN Skill Developer Package (uliya-skill-kit 0.7.3). It delegates self-contained tasks to four registered NAS experts:
 
 - `photo-agent`: checks the photo index, searches by scene, person, object, OCR text, and time, runs the vision checks, and makes the album.
 - `document-agent`: reads the shot list into structured items.
