@@ -4,6 +4,9 @@ An entry for the [UGREEN Hackathon 2026 on AI NAS](https://ugreenhackathon.devpo
 
 Shot List Coverage is a UGOS Skill for photographers. It compares a client shot list with the photos of a shoot on the NAS. It marks each shot as covered, weak, or missing, and gives the best frame and 2 alternates for each shot. After the photographer confirms, it makes an album of the best frames and saves a coverage report in the shoot folder. It only reads photos.
 
+
+**New session?** Read [HANDOFF.md](HANDOFF.md) first: status, dates, open tasks, and how to run the static check.
+
 ## Contents
 
 | Path | What it is |
