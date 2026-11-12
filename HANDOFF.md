@@ -41,7 +41,7 @@ Done in both repos:
 
 Not done (needs the user):
 
-1. Check the Devpost Rules tab: can one team enter two Skills? If not, submit Household Wiki only.
+1. Done (2026-11-12): the rules allow two entries per team. Both entries are being submitted.
 2. Check the entrant name "Vaughn DiMarco" in both proposals. Add teammates and their consent if any.
 3. Create the Devpost projects and upload the files in `SUBMISSION.md`.
 4. Optional: upload the concept videos to YouTube and paste the links into Devpost.
