@@ -18,7 +18,7 @@
 .w { display: inline-block; }
 </style>
   <div id="root" data-composition-id="s9" data-width="1920" data-height="1080">
-    <div id="s9-stage" class="clip stage" data-start="0" data-duration="9.9" data-track-index="0">
+    <div id="s9-stage" class="clip stage" data-start="0" data-duration="7.9" data-track-index="0">
 
       <div class="abs" id="s9-sheet" style="left:-60px;top:20px;width:2040px;height:1040px"><div class="frame s9-f" id="s9-f0" data-layout-ignore style="left:40px;top:60px;width:306px;height:209px;padding-bottom:8px"><img src="assets/photos/IMG_2001.jpg" alt=""></div><div class="frame s9-f" id="s9-f1" data-layout-ignore style="left:370px;top:60px;width:306px;height:209px;padding-bottom:8px"><img src="assets/photos/IMG_2002.jpg" alt=""></div><div class="frame s9-f" id="s9-f2" data-layout-ignore style="left:700px;top:60px;width:306px;height:209px;padding-bottom:8px"><img src="assets/photos/IMG_2008.jpg" alt=""></div><div class="frame s9-f" id="s9-f3" data-layout-ignore style="left:1030px;top:60px;width:306px;height:209px;padding-bottom:8px"><img src="assets/photos/IMG_2015.jpg" alt=""></div><div class="frame s9-f" id="s9-f4" data-layout-ignore style="left:1360px;top:60px;width:306px;height:209px;padding-bottom:8px"><img src="assets/photos/IMG_2013.jpg" alt=""></div><div class="frame s9-f" id="s9-f5" data-layout-ignore style="left:1690px;top:60px;width:306px;height:209px;padding-bottom:8px"><img src="assets/photos/IMG_2021.jpg" alt=""></div><div class="frame s9-f" id="s9-f6" data-layout-ignore style="left:40px;top:390px;width:306px;height:209px;padding-bottom:8px"><img src="assets/photos/IMG_2022.jpg" alt=""></div><div class="frame s9-f" id="s9-f7" data-layout-ignore style="left:370px;top:390px;width:306px;height:209px;padding-bottom:8px"><img src="assets/photos/IMG_2029.jpg" alt=""></div><div class="frame s9-f" id="s9-f8" data-layout-ignore style="left:700px;top:390px;width:306px;height:209px;padding-bottom:8px"><img src="assets/photos/IMG_2027.jpg" alt=""></div><div class="frame s9-f" id="s9-f9" data-layout-ignore style="left:1030px;top:390px;width:306px;height:209px;padding-bottom:8px"><img src="assets/photos/IMG_2035.jpg" alt=""></div><div class="frame s9-f" id="s9-f10" data-layout-ignore style="left:1360px;top:390px;width:306px;height:209px;padding-bottom:8px"><img src="assets/photos/IMG_2037.jpg" alt=""></div><div class="frame s9-f" id="s9-f11" data-layout-ignore style="left:1690px;top:390px;width:306px;height:209px;padding-bottom:8px"><img src="assets/photos/IMG_2036.jpg" alt=""></div><div class="frame s9-f" id="s9-f12" data-layout-ignore style="left:40px;top:720px;width:306px;height:209px;padding-bottom:8px"><img src="assets/photos/IMG_2003.jpg" alt=""></div><div class="frame s9-f" id="s9-f13" data-layout-ignore style="left:370px;top:720px;width:306px;height:209px;padding-bottom:8px"><img src="assets/photos/IMG_2052.jpg" alt=""></div><div class="frame s9-f" id="s9-f14" data-layout-ignore style="left:700px;top:720px;width:306px;height:209px;padding-bottom:8px"><img src="assets/photos/IMG_2049.jpg" alt=""></div><div class="frame s9-f" id="s9-f15" data-layout-ignore style="left:1030px;top:720px;width:306px;height:209px;padding-bottom:8px"><img src="assets/photos/IMG_2046.jpg" alt=""></div><div class="frame s9-f" id="s9-f16" data-layout-ignore style="left:1360px;top:720px;width:306px;height:209px;padding-bottom:8px"><img src="assets/photos/IMG_2004.jpg" alt=""></div><div class="frame s9-f" id="s9-f17" data-layout-ignore style="left:1690px;top:720px;width:306px;height:209px;padding-bottom:8px"><img src="assets/photos/IMG_2006.jpg" alt=""></div></div>
       <div class="abs" style="inset:0;background:radial-gradient(ellipse at 50% 46%, rgba(13,19,24,.95) 0%, rgba(13,19,24,.88) 45%, rgba(13,19,24,.66) 100%)"></div>
@@ -47,7 +47,13 @@
 
       [3.7, 4.55, 5.75].forEach((t, k) => tl.fromTo(document.querySelectorAll(".s9-l")[k], { opacity: 0, y: 24, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.35, ease: "expo.out" }, t));
 
-      window.__timelines["s9"] = tl;
+      // Map the cue times above to the current narration.
+      const W = [[0, 0], [1.75, 0.5], [3.76, 2.15], [4.59, 2.93], [5.75, 3.8], [7.8, 5.78], [9.9, 7.9]];
+      const warped = gsap.timeline({ paused: true });
+      for (let k = 0; k + 1 < W.length; k++) {
+        warped.fromTo(tl, { time: W[k][0] }, { time: W[k + 1][0], duration: W[k + 1][1] - W[k][1], ease: "none", immediateRender: false }, W[k][1]);
+      }
+      window.__timelines["s9"] = warped;
     })();
   </script>
 </template>

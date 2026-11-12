@@ -18,7 +18,7 @@
 .w { display: inline-block; }
 </style>
   <div id="root" data-composition-id="s4" data-width="1920" data-height="1080">
-    <div id="s4-stage" class="clip stage" data-start="0" data-duration="8.5" data-track-index="0">
+    <div id="s4-stage" class="clip stage" data-start="0" data-duration="7.0" data-track-index="0">
 
       <div class="abs tag" id="s4-t1" style="left:140px;top:150px">1 · Copy the card to the NAS</div>
       <div class="abs" id="s4-card" style="left:150px;top:300px;width:170px;height:220px;background:#2f3c48;border-radius:14px 40px 14px 14px;border:3px solid #62c3e4">
@@ -60,7 +60,13 @@
 
       tl.to("#s4-stage > *", { opacity: 0, filter: "blur(10px)", duration: 0.28, ease: "power3.in" }, END - 0.3);
 
-      window.__timelines["s4"] = tl;
+      // Map the cue times above to the current narration.
+      const W = [[0, 0], [0.97, 0.5], [3.33, 2.56], [7.79, 6.3], [8.5, 7.0]];
+      const warped = gsap.timeline({ paused: true });
+      for (let k = 0; k + 1 < W.length; k++) {
+        warped.fromTo(tl, { time: W[k][0] }, { time: W[k + 1][0], duration: W[k + 1][1] - W[k][1], ease: "none", immediateRender: false }, W[k][1]);
+      }
+      window.__timelines["s4"] = warped;
     })();
   </script>
 </template>

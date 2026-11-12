@@ -18,7 +18,7 @@
 .w { display: inline-block; }
 </style>
   <div id="root" data-composition-id="s7" data-width="1920" data-height="1080">
-    <div id="s7-stage" class="clip stage" data-start="0" data-duration="9.3" data-track-index="0">
+    <div id="s7-stage" class="clip stage" data-start="0" data-duration="8.2" data-track-index="0">
 
       <div class="abs tag" style="left:120px;top:110px" id="s7-tag">Shot 10 · must-have · edge run from the test plan</div>
       <div class="abs disp" id="s7-h" style="left:120px;top:146px;font-size:60px">Ana with Grandma Rosa</div>
@@ -53,7 +53,13 @@
 
       tl.to("#s7-stage > *", { opacity: 0, filter: "blur(10px)", duration: 0.28, ease: "power3.in" }, END - 0.3);
 
-      window.__timelines["s7"] = tl;
+      // Map the cue times above to the current narration.
+      const W = [[0, 0], [0.5, 0.5], [4.16, 3.28], [5.61, 4.59], [6.85, 5.77], [8.56, 7.5], [9.3, 8.2]];
+      const warped = gsap.timeline({ paused: true });
+      for (let k = 0; k + 1 < W.length; k++) {
+        warped.fromTo(tl, { time: W[k][0] }, { time: W[k + 1][0], duration: W[k + 1][1] - W[k][1], ease: "none", immediateRender: false }, W[k][1]);
+      }
+      window.__timelines["s7"] = warped;
     })();
   </script>
 </template>

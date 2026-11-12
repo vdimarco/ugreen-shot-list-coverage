@@ -18,7 +18,7 @@
 .w { display: inline-block; }
 </style>
   <div id="root" data-composition-id="s2" data-width="1920" data-height="1080">
-    <div id="s2-stage" class="clip stage" data-start="0" data-duration="7.4" data-track-index="0">
+    <div id="s2-stage" class="clip stage" data-start="0" data-duration="7.3" data-track-index="0">
 
       <div class="paper" id="s2-paper" style="left:130px;top:150px;width:720px;height:640px;padding:40px 46px">
         <div class="mono" style="font-size:22px;letter-spacing:.08em;color:#566573;margin-bottom:14px">CLIENT SHOT LIST</div><div class="s2-l" style="font-size:27px;line-height:50px;white-space:nowrap">1. Ana&#x27;s ring, close-up on her hand <b>*</b></div><div class="s2-l" style="font-size:27px;line-height:50px;white-space:nowrap">2. Flowers on the main table, wide</div><div class="s2-l" style="font-size:27px;line-height:50px;white-space:nowrap">3. Welcome sign &quot;Congratulations Ana &amp; Daniel&quot;</div><div class="s2-l" style="font-size:27px;line-height:50px;white-space:nowrap">4. Ana and Daniel together, full length <b>*</b></div><div class="s2-l" style="font-size:27px;line-height:50px;white-space:nowrap">5. Daniel with his parents <b>*</b></div><div class="s2-l" style="font-size:27px;line-height:50px;white-space:nowrap">6. Guests arriving at the front door</div><div class="s2-l" style="font-size:27px;line-height:50px;white-space:nowrap">7. Daniel giving the toast <b>*</b></div><div class="s2-l" style="font-size:27px;line-height:50px;white-space:nowrap">8. Ana laughing during the toast <b>*</b></div><div class="s2-l" style="font-size:27px;line-height:50px;white-space:nowrap">9. Glasses raised, close-up</div><div class="s2-l" style="font-size:27px;line-height:50px;white-space:nowrap">10. Ana with Grandma Rosa <b>*</b></div>
@@ -45,7 +45,13 @@
 
       tl.to("#s2-stage > *", { opacity: 0, filter: "blur(10px)", duration: 0.28, ease: "power3.in" }, END - 0.3);
 
-      window.__timelines["s2"] = tl;
+      // Map the cue times above to the current narration.
+      const W = [[0, 0], [0.5, 0.5], [2.65, 2.58], [5.45, 5.41], [6.72, 6.57], [7.4, 7.3]];
+      const warped = gsap.timeline({ paused: true });
+      for (let k = 0; k + 1 < W.length; k++) {
+        warped.fromTo(tl, { time: W[k][0] }, { time: W[k + 1][0], duration: W[k + 1][1] - W[k][1], ease: "none", immediateRender: false }, W[k][1]);
+      }
+      window.__timelines["s2"] = warped;
     })();
   </script>
 </template>

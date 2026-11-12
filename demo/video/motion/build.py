@@ -3,8 +3,9 @@
 
 Every shot, status, file name and reason on screen is read from
 ../../shot-list, ../../expected and ../../generated. The narration is the
-existing set in ../narration (copied to assets/audio). Scene timing follows
-the narration clip lengths and the pauses inside them.
+set in ../narration-natural (copied to assets/audio). The cue times in each
+scene were set against the first narration (../narration); WARP maps them to
+the pauses in the current narration.
 
     python3 demo/video/motion/build.py      # writes index.html and compositions/
     cd demo/video/motion && npx hyperframes check && npx hyperframes render
@@ -14,6 +15,7 @@ import html
 import json
 import re
 import shutil
+import subprocess
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
@@ -64,9 +66,34 @@ MUST_MISSING = [s for s in SHOTS if s["must"] and s["status"] != "covered"]
 TOAST = [p for p in PHOTOS if "17:00" <= p["time"] < "17:30"]
 
 # ---------------------------------------------------------------- timing
-NARR = [9.492, 6.530, 7.800, 7.575, 17.280, 11.100, 8.359, 7.512, 7.300]
+NARR_DIR = HERE.parent / "narration-natural"
+NARR = [round(float(subprocess.check_output(
+    ["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0",
+     str(NARR_DIR / ("scene%d.m4a" % i))])), 2) for i in range(1, 10)]
 LEAD = 0.5
-SLOTS = [10.4, 7.4, 8.7, 8.5, 18.2, 12.0, 9.3, 8.4, 9.9]
+# Scene lengths the cue times were written for (first narration).
+OLD_SLOTS = [10.4, 7.4, 8.7, 8.5, 18.2, 12.0, 9.3, 8.4, 9.9]
+# Per scene: (time in the first narration clip, time in the current clip) at
+# the start of each phrase; the last pair is the end of speech.
+ANCHORS = [
+    [(0, 0), (2.03, 1.60), (4.90, 3.95), (6.82, 5.30), (9.20, 7.08)],
+    [(0, 0), (2.15, 2.08), (4.95, 4.91), (6.22, 6.07)],
+    [(0, 0), (2.40, 1.20), (6.16, 3.27), (7.80, 4.83)],
+    [(0.47, 0), (2.83, 2.06), (7.29, 5.80)],
+    [(0.42, 0), (3.16, 2.53), (6.67, 5.29), (7.49, 5.89), (12.40, 9.54), (16.34, 11.89)],
+    [(0, 0), (2.07, 1.46), (5.20, 4.03), (11.10, 8.78)],
+    [(0, 0), (3.66, 2.78), (5.11, 4.09), (6.35, 5.27), (8.06, 7.00)],
+    [(0, 0), (5.65, 5.06), (7.20, 6.61)],
+    [(1.25, 0), (3.26, 1.65), (4.09, 2.43), (5.25, 3.30), (7.30, 5.28)],
+]
+SLOTS, WARP = [], []
+for _i, _a in enumerate(ANCHORS):
+    _tail = OLD_SLOTS[_i] - LEAD - _a[-1][0]
+    _slot = round(LEAD + _a[-1][1] + _tail, 1)
+    _w = [(0, 0)] + [(round(LEAD + o, 2), round(LEAD + n, 2)) for o, n in _a] + [(OLD_SLOTS[_i], _slot)]
+    assert all(x[0] < y[0] and x[1] < y[1] for x, y in zip(_w, _w[1:])), (_i + 1, _w)
+    SLOTS.append(_slot)
+    WARP.append([list(x) for x in _w])
 STARTS = [round(sum(SLOTS[:i]), 2) for i in range(9)]
 TOTAL = round(sum(SLOTS), 2)
 
@@ -106,11 +133,17 @@ def scene(i, body, script):
       const tl = gsap.timeline({ paused: true });
       const END = %s;
 %s
-      window.__timelines["%s"] = tl;
+      // Map the cue times above to the current narration.
+      const W = %s;
+      const warped = gsap.timeline({ paused: true });
+      for (let k = 0; k + 1 < W.length; k++) {
+        warped.fromTo(tl, { time: W[k][0] }, { time: W[k + 1][0], duration: W[k + 1][1] - W[k][1], ease: "none", immediateRender: false }, W[k][1]);
+      }
+      window.__timelines["%s"] = warped;
     })();
   </script>
 </template>
-""" % (CSS, sid, sid, SLOTS[i - 1], body, SLOTS[i - 1], script, sid)
+""" % (CSS, sid, sid, SLOTS[i - 1], body, OLD_SLOTS[i - 1], script, json.dumps(WARP[i - 1]), sid)
 
 
 def words(text, cls, pid):
@@ -162,7 +195,6 @@ def s1():
       %s
       <div class="abs" id="s1-sub" style="left:0;right:0;top:590px;text-align:center;font-size:52px;color:#c7d2db">A UGOS Skill for photographers</div>
       <div class="abs" style="left:0;right:0;top:720px;text-align:center">
-        <span class="pill mono" id="s1-c1" style="font-size:28px;color:#f5e3a3;background:#3a300f;margin:0 10px">Concept preview</span>
         <span class="pill mono" id="s1-c2" style="font-size:28px;color:#f5e3a3;background:#3a300f;margin:0 10px">Made with AI-generated photos</span>
       </div>
 """ % ("".join(sheet), words("Shot List Coverage", "s1-w", "s1-w"), ticks("s1k", 584, 540))
@@ -172,7 +204,6 @@ def s1():
       tl.fromTo(".s1-w", { opacity: 0, filter: "blur(14px)", scale: 1.12 }, { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.3, ease: "power4.out", stagger: 0.11 }, 0.45);
 %s
       tl.fromTo("#s1-sub", { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 0.5, ease: "expo.out" }, 2.45);
-      tl.fromTo("#s1-c1", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.6)" }, 5.4);
       tl.fromTo("#s1-c2", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.6)" }, 7.3);
 %s""" % (TICK_JS % {"p": "s1k", "t0": 1.2, "t1": 3.0}, OUT_JS % "s1")
     return scene(1, body, js)
@@ -535,7 +566,7 @@ LABEL = """<template>
   <div id="root" data-composition-id="label" data-width="1920" data-height="1080" data-no-timeline>
     <div id="label-band" class="clip" data-start="0" data-duration="%s" data-track-index="0"
          style="position:absolute;left:96px;right:96px;top:918px;height:54px;border-radius:27px;background:#3a300f;border:2px solid #6b5a1c;color:#f5e3a3;font-family:'Inter',sans-serif;font-weight:700;font-size:28px;line-height:50px;text-align:center;white-space:nowrap">
-      CONCEPT PREVIEW · AI-generated photos, fictional people · Expected report shown · Not a recording on a UGREEN AI NAS
+      AI-generated photos, fictional people · Expected report shown · Not a recording on a UGREEN AI NAS
     </div>
   </div>
 </template>
@@ -585,7 +616,7 @@ def main():
     (HERE / "assets/audio").mkdir(parents=True, exist_ok=True)
     (HERE / "assets/photos").mkdir(parents=True, exist_ok=True)
     for i in range(1, 10):
-        shutil.copy(HERE.parent / "narration" / ("scene%d.m4a" % i), HERE / "assets/audio")
+        shutil.copy(NARR_DIR / ("scene%d.m4a" % i), HERE / "assets/audio")
     for p in PHOTOS:
         shutil.copy(DEMO / "generated/photos" / p["file"], HERE / "assets/photos")
     for i, fn in enumerate([s1, s2, s3, s4, s5, s6, s7, s8, s9], 1):

@@ -41,9 +41,11 @@ Needs Python with Pillow, `ffmpeg`, and `pdftoppm`.
 
 ## Motion-graphics version (`shot-list-coverage-motion.mp4`)
 
-`shot-list-coverage-motion.mp4`: 1920 x 1080, 30 fps, 93 seconds. It uses the same 9 narration files, the same photos, and the same expected report as the concept preview, with animated scenes built in HyperFrames (HTML and GSAP rendered to video). It has no music. `shot-list-coverage-motion-storyboard.jpg` shows 12 frames.
+`shot-list-coverage-motion.mp4`: 1920 x 1080, 30 fps, 76 seconds. It uses the same photos and the same expected report as the concept preview, with animated scenes built in HyperFrames (HTML and GSAP rendered to video). It has no music. `shot-list-coverage-motion-storyboard.jpg` shows 12 frames.
 
-**It is also a concept preview, not a recording of the Skill on a UGREEN AI NAS.** A label on every frame says: "Concept preview. AI-generated photos, fictional people. Expected report shown. Not a recording on a UGREEN AI NAS."
+The narration is in `narration-natural/` (Higgsfield, Eleven v4, preset voice "Benji"). The text is the same as in the table above, except scene 1, which ends with "Our example shoot is made with AI-generated photos."
+
+**It is not a recording of the Skill on a UGREEN AI NAS.** A label on every frame says: "AI-generated photos, fictional people. Expected report shown. Not a recording on a UGREEN AI NAS."
 
 The project is in `motion/`. `motion/build.py` writes `index.html` and `compositions/s1.html` to `s9.html`.
 
