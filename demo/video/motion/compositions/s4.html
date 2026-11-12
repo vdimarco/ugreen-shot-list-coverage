@@ -1,0 +1,66 @@
+<template>
+  <style>
+#root { position: absolute; inset: 0; color: #eaf0f4; font-family: 'Inter', sans-serif; }
+.stage { position: absolute; inset: 0; }
+.abs { position: absolute; }
+.disp { font-family: 'Outfit', sans-serif; font-weight: 700; letter-spacing: -0.02em; }
+.mono { font-family: 'JetBrains Mono', monospace; }
+.tag { font-family: 'JetBrains Mono', monospace; font-size: 28px; letter-spacing: 0.06em; text-transform: uppercase; color: #8fa0ae; }
+.pill { display: inline-block; font-weight: 700; border-radius: 999px; padding: 6px 18px; font-size: 24px; }
+.covered { color: #6fd19c; background: #12382a; }
+.weak { color: #f0c36a; background: #3d2f0c; }
+.missing { color: #ff9b93; background: #45191a; }
+.frame { position: absolute; background: #05080b; padding: 8px 8px 30px; border-radius: 4px; box-shadow: 0 10px 30px rgba(0,0,0,.45); }
+.frame img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.frame span { position: absolute; left: 8px; bottom: 4px; font-family: 'JetBrains Mono', monospace; font-size: 18px; color: #dfe6ec; }
+.panel { position: absolute; background: #162029; border: 2px solid #2f3c48; border-radius: 14px; }
+.paper { position: absolute; background: #f3f1ea; color: #17212b; border-radius: 6px; box-shadow: 0 20px 60px rgba(0,0,0,.5); }
+.w { display: inline-block; }
+</style>
+  <div id="root" data-composition-id="s4" data-width="1920" data-height="1080">
+    <div id="s4-stage" class="clip stage" data-start="0" data-duration="8.5" data-track-index="0">
+
+      <div class="abs tag" id="s4-t1" style="left:140px;top:150px">1 · Copy the card to the NAS</div>
+      <div class="abs" id="s4-card" style="left:150px;top:300px;width:170px;height:220px;background:#2f3c48;border-radius:14px 40px 14px 14px;border:3px solid #62c3e4">
+        <div class="mono" style="position:absolute;left:0;right:0;top:86px;text-align:center;font-size:34px;color:#eaf0f4">CARD</div></div>
+      <div class="abs s4-m" style="left:250px;top:300px;width:90px;height:60px;border:3px solid #05080b;background:url(assets/photos/IMG_2001.jpg) center/cover"></div><div class="abs s4-m" style="left:250px;top:370px;width:90px;height:60px;border:3px solid #05080b;background:url(assets/photos/IMG_2002.jpg) center/cover"></div><div class="abs s4-m" style="left:250px;top:440px;width:90px;height:60px;border:3px solid #05080b;background:url(assets/photos/IMG_2003.jpg) center/cover"></div><div class="abs s4-m" style="left:250px;top:300px;width:90px;height:60px;border:3px solid #05080b;background:url(assets/photos/IMG_2004.jpg) center/cover"></div><div class="abs s4-m" style="left:250px;top:370px;width:90px;height:60px;border:3px solid #05080b;background:url(assets/photos/IMG_2005.jpg) center/cover"></div><div class="abs s4-m" style="left:250px;top:440px;width:90px;height:60px;border:3px solid #05080b;background:url(assets/photos/IMG_2006.jpg) center/cover"></div><div class="abs s4-m" style="left:250px;top:300px;width:90px;height:60px;border:3px solid #05080b;background:url(assets/photos/IMG_2007.jpg) center/cover"></div><div class="abs s4-m" style="left:250px;top:370px;width:90px;height:60px;border:3px solid #05080b;background:url(assets/photos/IMG_2008.jpg) center/cover"></div><div class="abs s4-m" style="left:250px;top:440px;width:90px;height:60px;border:3px solid #05080b;background:url(assets/photos/IMG_2009.jpg) center/cover"></div><div class="abs s4-m" style="left:250px;top:300px;width:90px;height:60px;border:3px solid #05080b;background:url(assets/photos/IMG_2010.jpg) center/cover"></div><div class="abs s4-m" style="left:250px;top:370px;width:90px;height:60px;border:3px solid #05080b;background:url(assets/photos/IMG_2011.jpg) center/cover"></div><div class="abs s4-m" style="left:250px;top:440px;width:90px;height:60px;border:3px solid #05080b;background:url(assets/photos/IMG_2012.jpg) center/cover"></div>
+      <div class="panel" id="s4-folder" style="left:520px;top:270px;width:330px;height:290px;border-color:#62c3e4">
+        <div class="mono" style="position:absolute;left:24px;top:22px;font-size:20px;color:#8fa0ae">NAS FOLDER</div>
+        <div class="disp" id="s4-n" style="position:absolute;left:24px;top:70px;font-size:120px;line-height:1">0</div>
+        <div style="position:absolute;left:24px;top:200px;font-size:26px;color:#c7d2db">images in the demo shoot</div></div>
+      <div class="abs mono" id="s4-path" style="left:150px;top:600px;font-size:24px;color:#8fa0ae">Photos/2026-11 Rivera-Okoro party</div>
+      <div class="abs tag" id="s4-t2" style="left:980px;top:150px">2 · Ask in plain words</div>
+      <div class="panel" id="s4-chat" style="left:970px;top:230px;width:830px;height:600px">
+        <div class="mono" style="position:absolute;left:36px;top:26px;font-size:20px;color:#f5e3a3">ILLUSTRATION · EXPECTED FLOW</div>
+        <div id="s4-b1" style="position:absolute;left:36px;top:80px;width:760px;min-height:210px;background:#0b5d7a;border-radius:22px;padding:28px 32px;font-size:36px;line-height:1.35"><span id="s4-type"></span><span id="s4-caret" style="display:inline-block;width:4px;height:36px;background:#eaf0f4;margin-left:4px;vertical-align:-6px"></span></div>
+        <div id="s4-b2" style="position:absolute;left:36px;top:400px;width:700px;background:#22303c;border-radius:22px;padding:26px 32px;font-size:34px;line-height:1.35">I read <b>20 shots</b>, <b>8 must-have</b>. Is this list correct?</div>
+      </div>
+
+    </div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const END = 8.5;
+
+      const TEXT = "Check my shot list Documents/rivera-okoro-shot-list.pdf against Photos/2026-11 Rivera-Okoro party.";
+      tl.fromTo(["#s4-t1", "#s4-card"], { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.45, ease: "expo.out", stagger: 0.08 }, 0.15);
+      tl.fromTo(["#s4-folder", "#s4-path"], { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.45, ease: "expo.out", stagger: 0.08 }, 0.5);
+      document.querySelectorAll(".s4-m").forEach((el, k) => {
+        tl.fromTo(el, { opacity: 0, x: 0, scale: 0.6 }, { opacity: 1, x: 150, scale: 1, duration: 0.2, ease: "power2.out" }, 1.0 + k * 0.1);
+        tl.to(el, { x: 380, opacity: 0, scale: 0.5, duration: 0.3, ease: "power3.in" }, 1.2 + k * 0.1);
+      });
+      const c = { v: 0 };
+      tl.fromTo(c, { v: 0 }, { v: 53, duration: 1.4, ease: "power1.out", onUpdate: () => { document.getElementById("s4-n").textContent = Math.round(c.v); } }, 1.3);
+      tl.fromTo(["#s4-t2", "#s4-chat"], { opacity: 0, x: 60 }, { opacity: 1, x: 0, duration: 0.5, ease: "expo.out", stagger: 0.06 }, 2.9);
+      const ty = { v: 0 };
+      tl.fromTo(ty, { v: 0 }, { v: TEXT.length, duration: 3.0, ease: "none", onUpdate: () => { document.getElementById("s4-type").textContent = TEXT.slice(0, Math.round(ty.v)); } }, 3.3);
+      tl.fromTo("#s4-caret", { opacity: 1 }, { opacity: 0, duration: 0.1 }, 6.35);
+      tl.fromTo("#s4-b2", { opacity: 0, y: 30, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.4, ease: "back.out(1.4)" }, 6.45);
+
+      tl.to("#s4-stage > *", { opacity: 0, filter: "blur(10px)", duration: 0.28, ease: "power3.in" }, END - 0.3);
+
+      window.__timelines["s4"] = tl;
+    })();
+  </script>
+</template>

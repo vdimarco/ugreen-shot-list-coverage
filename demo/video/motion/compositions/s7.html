@@ -1,0 +1,59 @@
+<template>
+  <style>
+#root { position: absolute; inset: 0; color: #eaf0f4; font-family: 'Inter', sans-serif; }
+.stage { position: absolute; inset: 0; }
+.abs { position: absolute; }
+.disp { font-family: 'Outfit', sans-serif; font-weight: 700; letter-spacing: -0.02em; }
+.mono { font-family: 'JetBrains Mono', monospace; }
+.tag { font-family: 'JetBrains Mono', monospace; font-size: 28px; letter-spacing: 0.06em; text-transform: uppercase; color: #8fa0ae; }
+.pill { display: inline-block; font-weight: 700; border-radius: 999px; padding: 6px 18px; font-size: 24px; }
+.covered { color: #6fd19c; background: #12382a; }
+.weak { color: #f0c36a; background: #3d2f0c; }
+.missing { color: #ff9b93; background: #45191a; }
+.frame { position: absolute; background: #05080b; padding: 8px 8px 30px; border-radius: 4px; box-shadow: 0 10px 30px rgba(0,0,0,.45); }
+.frame img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.frame span { position: absolute; left: 8px; bottom: 4px; font-family: 'JetBrains Mono', monospace; font-size: 18px; color: #dfe6ec; }
+.panel { position: absolute; background: #162029; border: 2px solid #2f3c48; border-radius: 14px; }
+.paper { position: absolute; background: #f3f1ea; color: #17212b; border-radius: 6px; box-shadow: 0 20px 60px rgba(0,0,0,.5); }
+.w { display: inline-block; }
+</style>
+  <div id="root" data-composition-id="s7" data-width="1920" data-height="1080">
+    <div id="s7-stage" class="clip stage" data-start="0" data-duration="9.3" data-track-index="0">
+
+      <div class="abs tag" style="left:120px;top:110px" id="s7-tag">Shot 10 · must-have · edge run from the test plan</div>
+      <div class="abs disp" id="s7-h" style="left:120px;top:146px;font-size:60px">Ana with Grandma Rosa</div>
+      <div class="frame s7-o" id="s7-o0" style="left:120px;top:230px;width:356px;height:265px"><img src="assets/photos/IMG_2027.jpg" alt=""><span data-layout-ignore>IMG_2027.jpg</span></div><div class="frame s7-o" id="s7-o1" style="left:520px;top:230px;width:356px;height:265px"><img src="assets/photos/IMG_2030.jpg" alt=""><span data-layout-ignore>IMG_2030.jpg</span></div><div class="frame s7-o" id="s7-o2" style="left:920px;top:230px;width:356px;height:265px"><img src="assets/photos/IMG_2032.jpg" alt=""><span data-layout-ignore>IMG_2032.jpg</span></div><div class="frame s7-c" id="s7-c0" style="left:120px;top:530px;width:356px;height:265px"><img src="assets/photos/IMG_2024.jpg" alt=""><span data-layout-ignore>IMG_2024.jpg</span></div><div class="frame s7-c" id="s7-c1" style="left:520px;top:530px;width:356px;height:265px"><img src="assets/photos/IMG_2028.jpg" alt=""><span data-layout-ignore>IMG_2028.jpg</span></div><div class="frame s7-c" id="s7-c2" style="left:920px;top:530px;width:356px;height:265px"><img src="assets/photos/IMG_2033.jpg" alt=""><span data-layout-ignore>IMG_2033.jpg</span></div>
+      <div class="abs mono" id="s7-lo" style="left:1340px;top:330px;font-size:26px;color:#6fd19c;width:480px">3 frames with eyes open</div>
+      <div class="abs mono" id="s7-lx" style="left:1340px;top:372px;font-size:22px;color:#8fa0ae;width:480px">removed from the folder for the edge run</div>
+      <div class="abs mono" id="s7-lc" style="left:1340px;top:560px;font-size:26px;color:#f0c36a;width:480px">3 frames with eyes closed</div>
+      <div class="abs" id="s7-st" style="left:1340px;top:640px;width:500px">
+        <div class="abs disp" id="s7-cov" style="left:0;top:0;font-size:84px;color:#6fd19c">covered</div>
+        <div class="abs" id="s7-strike" style="left:-10px;top:58px;width:340px;height:10px;background:#ff8f86;border-radius:5px"></div>
+        <div class="abs disp" id="s7-weak" style="left:0;top:100px;font-size:150px;color:#f0c36a;line-height:1">weak</div>
+      </div>
+
+    </div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const END = 9.3;
+
+      tl.fromTo(["#s7-tag", "#s7-h"], { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4, ease: "expo.out", stagger: 0.07 }, 0.15);
+      tl.fromTo(".s7-o, .s7-c", { opacity: 0, scale: 0.8, y: 40 }, { opacity: 1, scale: 1, y: 0, duration: 0.4, ease: "expo.out", stagger: 0.06 }, 0.35);
+      tl.fromTo(["#s7-lo", "#s7-lc"], { opacity: 0 }, { opacity: 1, duration: 0.3, stagger: 0.1 }, 0.9);
+      tl.fromTo("#s7-cov", { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(1.6)" }, 1.1);
+      tl.to(".s7-o", { opacity: 0.12, y: -30, scale: 0.94, filter: "grayscale(1)", duration: 0.4, ease: "power3.in", stagger: 0.12 }, 1.9);
+      tl.fromTo("#s7-lx", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 2.2);
+      tl.to("#s7-lo", { opacity: 0.4, duration: 0.3 }, 2.2);
+      tl.to(".s7-c", { boxShadow: "0 0 0 6px #f0c36a, 0 10px 30px rgba(0,0,0,.45)", duration: 0.3, ease: "power2.out", stagger: 0.1 }, 2.9);
+      tl.fromTo("#s7-weak", { opacity: 0, scale: 1.6, filter: "blur(14px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.35, ease: "power4.out" }, 4.75);
+      tl.fromTo("#s7-strike", { scaleX: 0, transformOrigin: "0% 50%" }, { scaleX: 1, duration: 0.3, ease: "power3.out" }, 5.7);
+      tl.to("#s7-cov", { opacity: 0.45, duration: 0.3 }, 5.7);
+
+      tl.to("#s7-stage > *", { opacity: 0, filter: "blur(10px)", duration: 0.28, ease: "power3.in" }, END - 0.3);
+
+      window.__timelines["s7"] = tl;
+    })();
+  </script>
+</template>

@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Shot List Coverage Walkthrough</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a light table. A sticky label strip, a six-stop walkthrough rail, and one working panel per stop; photos sit in contact-sheet frames with their file names. */
+:root {
+  --bg: #eef0f2;
+  --surface: #ffffff;
+  --sunken: #e2e6ea;
+  --ink: #17212b;
+  --muted: #566573;
+  --line: #c9d1d9;
+  --accent: #0b5d7a;
+  --accent-ink: #ffffff;
+  --covered: #1d7a4c;
+  --covered-bg: #dcf1e5;
+  --weak: #8a5a00;
+  --weak-bg: #fbecc8;
+  --missing: #b3261e;
+  --missing-bg: #fbe0dd;
+  --note-bg: #fff6d6;
+  --note-ink: #4d3b00;
+  --frame: #10161c;
+  --frame-ink: #e9eef2;
+  --display: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
+  --body: "Inter", "Segoe UI", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11171d; --surface: #1a232c; --sunken: #0c1116; --ink: #e8edf1; --muted: #9eabb7;
+    --line: #2f3c48; --accent: #62c3e4; --accent-ink: #06222d;
+    --covered: #6fd19c; --covered-bg: #12382a; --weak: #f0c36a; --weak-bg: #3d2f0c;
+    --missing: #ff9b93; --missing-bg: #45191a; --note-bg: #3a300f; --note-ink: #f5e3a3;
+    --frame: #05080b; --frame-ink: #dfe6ec; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #11171d; --surface: #1a232c; --sunken: #0c1116; --ink: #e8edf1; --muted: #9eabb7;
+  --line: #2f3c48; --accent: #62c3e4; --accent-ink: #06222d;
+  --covered: #6fd19c; --covered-bg: #12382a; --weak: #f0c36a; --weak-bg: #3d2f0c;
+  --missing: #ff9b93; --missing-bg: #45191a; --note-bg: #3a300f; --note-ink: #f5e3a3;
+  --frame: #05080b; --frame-ink: #dfe6ec; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.55 var(--body); }
+img { max-width: 100%; display: block; }
+[hidden] { display: none !important; }
+button { font: inherit; color: inherit; cursor: pointer; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.wrap { max-width: 1080px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+
+/* Persistent label */
+.label { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--note-bg); color: var(--note-ink); border-bottom: 1px solid var(--line); font-size: 13px; line-height: 1.4; }
+.label .wrap { padding-block: 8px; }
+.label strong { font-weight: 600; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--note-bg); }
+
+header.top .wrap { padding-block: 28px 12px; display: grid; gap: 8px; }
+.eyebrow { font: 500 12px/1.2 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+h1 { font: 700 clamp(28px, 5vw, 40px)/1.1 var(--display); margin: 0; text-wrap: balance; letter-spacing: -.01em; }
+.lede { margin: 0; max-width: 62ch; color: var(--muted); }
+
+/* Rail */
+nav.rail .wrap { padding-block: 12px; }
+.rail ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; }
+.rail button { width: 100%; text-align: left; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px; display: grid; gap: 2px; min-width: 0; }
+.rail .num { font: 500 11px/1 var(--mono); color: var(--muted); }
+.rail .name { font: 600 14px/1.2 var(--display); overflow-wrap: anywhere; }
+.rail button[aria-current="step"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.rail button[aria-current="step"] .num { color: var(--accent-ink); opacity: .8; }
+@media (max-width: 720px) { .rail ol { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+main .wrap { padding-block: 8px 32px; }
+section.step, .panel, .intro, .chat { grid-template-columns: minmax(0, 1fr); }
+section.step { display: grid; gap: 20px; }
+h2 { font: 600 clamp(22px, 3.4vw, 28px)/1.2 var(--display); margin: 0; text-wrap: balance; }
+h3 { font: 600 16px/1.3 var(--display); margin: 0; }
+p { margin: 0; max-width: 68ch; }
+.intro { display: grid; gap: 8px; }
+.muted { color: var(--muted); }
+.mono { font-family: var(--mono); font-size: .88em; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 16px; display: grid; gap: 12px; min-width: 0; }
+.cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 16px; align-items: start; }
+.tag { font: 500 11px/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+
+/* Status pills */
+.pill { display: inline-flex; align-items: center; gap: 6px; font: 600 12px/1 var(--body); padding: 4px 8px; border-radius: 999px; white-space: nowrap; }
+.pill::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+.pill.covered { color: var(--covered); background: var(--covered-bg); }
+.pill.weak { color: var(--weak); background: var(--weak-bg); }
+.pill.weak::before { border-radius: 1px; transform: rotate(45deg); }
+.pill.missing { color: var(--missing); background: var(--missing-bg); }
+.pill.missing::before { border-radius: 0; height: 3px; }
+.must { font: 600 11px/1 var(--mono); color: var(--accent); border: 1px solid currentColor; border-radius: 3px; padding: 2px 4px; white-space: nowrap; }
+
+/* Shot list paper */
+.paper { background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 20px; display: grid; gap: 16px; }
+.paper h3 { display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline; border-bottom: 1px solid var(--line); padding-bottom: 6px; }
+.paper h3 span { font: 400 13px/1.2 var(--mono); color: var(--muted); }
+.paper ol { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; }
+.paper li { display: grid; grid-template-columns: 2.2em minmax(0, 1fr) auto; gap: 8px; align-items: baseline; }
+.paper .n { font: 500 13px/1.4 var(--mono); color: var(--muted); text-align: right; }
+.sections { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 20px 28px; }
+.sections > div { display: grid; gap: 8px; align-content: start; }
+
+/* Chat */
+.chat { display: grid; gap: 10px; }
+.bubble { border-radius: 10px; padding: 12px 14px; max-width: 62ch; border: 1px solid var(--line); background: var(--surface); }
+.bubble.you { justify-self: end; background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.bubble .who { font: 500 11px/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; opacity: .8; display: block; margin-bottom: 6px; }
+.choices { display: flex; flex-wrap: wrap; gap: 8px; }
+.btn { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 8px 12px; font-weight: 500; }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.btn[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+
+/* Tables */
+.scroll { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font: 500 11px/1.2 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+td.num, th.num { font-variant-numeric: tabular-nums; text-align: right; }
+tr.row { cursor: pointer; }
+tr.row:hover td { background: var(--sunken); }
+tr.row[aria-selected="true"] td { background: var(--sunken); box-shadow: inset 3px 0 0 var(--accent); }
+tr.row td:first-child { font-variant-numeric: tabular-nums; }
+.rowbtn { background: none; border: 0; padding: 0; text-align: left; text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 3px; }
+
+/* Contact sheet */
+.sheet { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+.frame { background: var(--frame); color: var(--frame-ink); border-radius: 3px; padding: 6px 6px 8px; display: grid; gap: 6px; min-width: 0; position: relative; }
+.frame img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 1px; }
+.frame .fn { font: 500 11px/1.2 var(--mono); display: flex; justify-content: space-between; gap: 6px; }
+.frame .what { font-size: 12px; line-height: 1.3; opacity: .85; }
+.frame .role { font: 600 10px/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; padding: 3px 5px; border-radius: 2px; justify-self: start; }
+.role.match { background: var(--covered-bg); color: var(--covered); }
+.role.closed-eyes { background: var(--weak-bg); color: var(--weak); }
+.role.decoy { background: var(--missing-bg); color: var(--missing); }
+.role.filler { background: var(--sunken); color: var(--muted); }
+.frame.removed img { opacity: .25; filter: grayscale(1); }
+.frame.removed::after { content: "removed for the edge run"; position: absolute; left: 6px; right: 6px; top: 30%; text-align: center; font: 600 11px/1.3 var(--mono); color: var(--frame-ink); }
+.sheet.small { grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 6px; }
+.sheet.small .frame { padding: 4px 4px 6px; }
+.sheet.small .what, .sheet.small .role { display: none; }
+
+.cues { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 6px 14px; margin: 0; }
+.cues dt { font: 500 11px/1.6 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.cues dd { margin: 0; }
+.qs { margin: 0; padding-left: 1.2em; display: grid; gap: 4px; }
+select { font: inherit; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px; width: 100%; max-width: 100%; }
+.callout { border-left: 4px solid var(--missing); background: var(--missing-bg); padding: 12px 14px; border-radius: 0 6px 6px 0; display: grid; gap: 4px; }
+.callout.ok { border-color: var(--covered); background: var(--covered-bg); }
+.callout.warn { border-color: var(--weak); background: var(--weak-bg); }
+.summary { display: flex; flex-wrap: wrap; gap: 10px 22px; }
+.summary div { display: grid; gap: 2px; }
+.summary b { font: 700 28px/1 var(--display); font-variant-numeric: tabular-nums; }
+.state { font: 500 13px/1.4 var(--mono); padding: 8px 10px; border-radius: 6px; background: var(--sunken); }
+.pager { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 16px; }
+footer .wrap { padding-block: 16px 32px; color: var(--muted); font-size: 13px; }
+@media (prefers-reduced-motion: no-preference) { section.step { animation: in .25s ease-out; } @keyframes in { from { opacity: .4; transform: translateY(6px); } to { opacity: 1; transform: none; } } }
+</style>
+</head>
+<body>
+<div class="label" role="note"><div class="wrap"><strong>Concept preview.</strong> The photos are AI-generated and the people are fictional. The report shown is the <strong>expected</strong> report from the test files. This is not a recording of the Skill running on a UGREEN AI NAS.</div></div>
+
+<header class="top"><div class="wrap">
+  <span class="eyebrow">UGOS Skill for photographers · walkthrough</span>
+  <h1>Shot List Coverage</h1>
+  <p class="lede">A client sends a shot list. After the event you have a card full of frames. This Skill checks the list against the shoot folder on the NAS and says, line by line, which shots are covered, weak, or missing.</p>
+</div></header>
+
+<nav class="rail" aria-label="Walkthrough steps"><div class="wrap"><ol id="rail"></ol></div></nav>
+
+<main><div class="wrap">
+
+<section class="step" id="s-list" data-step="list">
+  <div class="intro"><h2>The client's shot list</h2>
+  <p>The Rivera-Okoro engagement party. <span id="count-shots"></span> shots, <span id="count-must"></span> of them must-have. The Skill keeps the client's words and the order of the list.</p></div>
+  <div class="paper"><div class="tag">rivera-okoro-shot-list.pdf · fictional sample</div><div class="sections" id="paper"></div></div>
+</section>
+
+<section class="step" id="s-request" data-step="request" hidden>
+  <div class="intro"><h2>The request</h2>
+  <p>You copy the card to the NAS, then ask in plain words. The Skill reads the list and shows it back to you. It continues only after you confirm.</p></div>
+  <div class="chat">
+    <div class="bubble you"><span class="who">You · expected flow</span>Check my shot list Documents/rivera-okoro-shot-list.pdf against Photos/2026-11 Rivera-Okoro party. The event is the Rivera-Okoro engagement party. Ana is Ana Rivera, Daniel is Daniel Okoro, Grandma Rosa is Rosa Rivera, and Maya is Maya Chen.</div>
+    <div class="bubble"><span class="who">Skill · expected flow</span>The shoot folder has <b id="count-photos"></b> images. I read <b id="count-shots2"></b> shots from the list. The must-have shots are <b id="must-list"></b>. Is this list correct?
+      <div class="scroll" style="margin-top:10px"><table id="parsed"><thead><tr><th class="num">#</th><th>Shot</th><th>Must</th><th>People</th></tr></thead><tbody></tbody></table></div>
+    </div>
+    <div class="choices"><button class="btn primary" id="confirm-list" type="button">Confirm the list</button><span class="state" id="confirm-state" hidden>Confirmed. The Skill starts the check.</span></div>
+  </div>
+</section>
+
+<section class="step" id="s-check" data-step="check" hidden>
+  <div class="intro"><h2>How each line is checked</h2>
+  <p>First a search of the shoot folder, built from the line itself. Then the NAS vision model looks at the best candidates and answers four questions about each one. Pick a shot to see its search and the frames the demo shoot holds for it.</p></div>
+  <div><label class="tag" for="pick-shot">Shot</label><br><select id="pick-shot"></select></div>
+  <div class="cols">
+    <div class="panel"><h3>1. Search the shoot folder</h3><dl class="cues" id="cues"></dl></div>
+    <div class="panel"><h3>2. Vision check of each candidate</h3>
+      <ol class="qs"><li>Does the photo show the shot? yes, partly, or no</li><li>Is the main subject in sharp focus?</li><li>Are the eyes of the main people open?</li><li>Is a person or object the shot needs cut off by the edge?</li></ol>
+      <div class="scroll"><table><thead><tr><th>Status</th><th>Rule</th></tr></thead><tbody>
+        <tr><td><span class="pill covered">covered</span></td><td>At least one good frame: shows the shot, sharp, eyes open, nothing cut off.</td></tr>
+        <tr><td><span class="pill weak">weak</span></td><td>No good frame, but at least one photo shows the shot or part of it.</td></tr>
+        <tr><td><span class="pill missing">missing</span></td><td>No photo shows the shot, or the search found no candidates.</td></tr>
+      </tbody></table></div>
+    </div>
+  </div>
+  <div class="panel"><h3 id="check-title"></h3><p class="muted" id="check-note"></p><div class="sheet" id="check-sheet"></div><div id="check-result"></div></div>
+</section>
+
+<section class="step" id="s-report" data-step="report" hidden>
+  <div class="intro"><h2>The report</h2>
+  <p>Missing must-have shots come first, then the counts, then every shot in list order. Select a row to see the frames for that shot.</p>
+  <p class="muted">Example of the expected report for the full demo shoot. Statuses come from <span class="mono">expected-full.csv</span>.</p></div>
+  <div class="panel"><div class="tag">Rivera-Okoro engagement party: shot list coverage</div>
+    <h3>Missing must-have shots</h3><div id="rep-missing" style="display:grid;gap:8px"></div>
+    <h3>Summary</h3><div class="summary" id="rep-summary"></div>
+  </div>
+  <div class="cols">
+    <div class="panel"><h3>All shots</h3><div class="scroll"><table id="rep-table"><thead><tr><th class="num">#</th><th>Shot</th><th>Must</th><th>Status</th></tr></thead><tbody></tbody></table></div></div>
+    <div class="panel" id="rep-detail" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="step" id="s-closed-eyes" data-step="closed-eyes" hidden>
+  <div class="intro"><h2>The closed-eyes case</h2>
+  <p>Shot 10, Ana with Grandma Rosa, is a must-have. The demo shoot has six frames of it. In three of them, eyes are closed. Take the three eyes-open frames out of the folder and run the check again.</p></div>
+  <div class="choices" role="group" aria-label="Which run"><button class="btn" id="run-full" type="button" aria-pressed="true">Full shoot</button><button class="btn" id="run-edge" type="button" aria-pressed="false">Edge run: eyes-open frames removed</button></div>
+  <div class="panel"><h3>Frames of shot 10 in the folder</h3><div class="sheet" id="edge-sheet"></div></div>
+  <div id="edge-result"></div>
+  <p class="muted">A frame with closed eyes still shows the shot, so the shot is not missing. But it is not a good frame, so the shot is weak, not covered, and it goes to the top of the report. You know before you leave the venue.</p>
+</section>
+
+<section class="step" id="s-album" data-step="album" hidden>
+  <div class="intro"><h2>Approve, then album and report</h2>
+  <p>The Skill only reads photos. It makes an album and saves the report only after you say so, and the NAS asks for approval before anything is written.</p></div>
+  <div class="chat">
+    <div class="bubble"><span class="who">Skill · expected flow</span>Make an album with the best frames and save this report in the shoot folder? You can answer: album and report, album only, report only, or no.</div>
+    <div class="choices" id="album-choices" role="group" aria-label="Your answer">
+      <button class="btn" type="button" data-a="both">Album and report</button><button class="btn" type="button" data-a="album">Album only</button><button class="btn" type="button" data-a="report">Report only</button><button class="btn" type="button" data-a="no">No</button>
+    </div>
+    <div class="state" id="album-state">Waiting for your answer. Nothing has changed on the NAS.</div>
+    <div class="choices"><button class="btn primary" id="approve" type="button" hidden>Approve on the NAS</button></div>
+  </div>
+  <div class="panel" id="album-panel" hidden><div class="tag">Album · Rivera-Okoro engagement party shot list</div><h3 id="album-title"></h3>
+    <p class="muted">One frame for each covered shot, in shot list order. The frames shown here are the first matching frame the manifest lists for each shot. On the NAS, the Skill picks the best frame from the vision check.</p>
+    <div class="sheet small" id="album-sheet"></div></div>
+  <div class="panel" id="report-panel" hidden><div class="tag">Saved report</div><p><span class="mono">Photos/2026-11 Rivera-Okoro party/Rivera-Okoro engagement party shot list coverage.md</span></p></div>
+  <div class="callout ok" id="readonly-note" hidden><b>No photo was moved, renamed, or changed.</b><span>The album points to the photos where they are. The file count and the modified times stay the same.</span></div>
+</section>
+
+<div class="pager" style="margin-top:24px"><button class="btn" id="prev" type="button">Back</button><button class="btn primary" id="next" type="button">Next</button></div>
+</div></main>
+
+<footer><div class="wrap">Shot List Coverage is an entry for the UGREEN Hackathon 2026 on AI NAS. This page is a concept preview built from the project's test files: the shot list, the photo manifest, and the expected results. All names and events are fictional.</div></footer>
+
+<script>
+const DATA = /*__DATA__*/null;
+const STEPS = [["list","Shot list"],["request","Request"],["check","The check"],["report","Report"],["closed-eyes","Closed eyes"],["album","Album"]];
+const $ = (s, r = document) => r.querySelector(s);
+const el = (tag, attrs = {}, kids = []) => { const e = document.createElement(tag); for (const [k, v] of Object.entries(attrs)) { if (k === "text") e.textContent = v; else if (k === "class") e.className = v; else e.setAttribute(k, v); } for (const c of [].concat(kids)) if (c) e.append(c); return e; };
+const shots = DATA.shots, photos = DATA.photos;
+const framesFor = n => photos.filter(p => p.shot === n);
+const pill = s => el("span", { class: "pill " + s, text: s });
+const frame = (p, extra = "") => el("figure", { class: "frame " + extra, style: "margin:0" }, [
+  el("img", { src: "img/" + p.file, alt: p.content + " (AI-generated sample photo)", loading: "lazy", width: "480", height: "322" }),
+  el("div", { class: "fn" }, [el("span", { text: p.file }), el("span", { text: p.time })]),
+  el("div", { class: "what", text: p.content }),
+  el("span", { class: "role " + p.role, text: p.role })
+]);
+
+/* Step 1: shot list */
+$("#count-shots").textContent = shots.length; $("#count-shots2").textContent = shots.length;
+$("#count-must").textContent = shots.filter(s => s.must).length;
+$("#count-photos").textContent = photos.length;
+$("#must-list").textContent = shots.filter(s => s.must).map(s => s.n).join(", ");
+const bySection = new Map(); for (const s of shots) { if (!bySection.has(s.section)) bySection.set(s.section, []); bySection.get(s.section).push(s); }
+for (const [name, list] of bySection) $("#paper").append(el("div", {}, [
+  el("h3", {}, [document.createTextNode(name), el("span", { text: list[0].window })]),
+  el("ol", {}, list.map(s => el("li", {}, [el("span", { class: "n", text: s.n + "." }), el("span", { text: s.text }), s.must ? el("span", { class: "must", text: "MUST" }) : el("span")])))
+]));
+
+/* Step 2: parsed list */
+for (const s of shots) $("#parsed tbody").append(el("tr", {}, [el("td", { class: "num", text: s.n }), el("td", { text: s.text }), el("td", { text: s.must ? "yes" : "" }), el("td", { text: s.people.join(", ") })]));
+$("#confirm-list").addEventListener("click", () => { $("#confirm-state").hidden = false; });
+
+/* Step 3: the check */
+const pick = $("#pick-shot");
+for (const s of shots) pick.append(el("option", { value: s.n, text: s.n + ". " + s.text }));
+function renderCheck(n) {
+  const s = shots.find(x => x.n === n), fr = framesFor(n);
+  const cues = $("#cues"); cues.replaceChildren();
+  const add = (k, v) => { cues.append(el("dt", { text: k }), el("dd", { text: v })); };
+  add("People", s.people.length ? s.people.join(", ") : "none named in this line");
+  add("Time window", s.window + " (" + s.section + ")");
+  add("Objects", s.objects.length ? s.objects.join(", ") : "none named in this line");
+  add("Visible text", s.visibleText.length ? s.visibleText.map(t => "“" + t + "”").join(", ") : "none");
+  add("Scene keyword", s.text);
+  $("#check-title").textContent = "Frames in the demo shoot for shot " + n;
+  $("#check-note").textContent = fr.length ? "From the photo manifest. “match” frames show the shot. “decoy” frames look close but do not show it. “closed-eyes” frames show it with eyes closed." : "The manifest lists no frame for this shot.";
+  $("#check-sheet").replaceChildren(...fr.map(p => frame(p)));
+  const box = el("div", { class: "callout " + (s.status === "covered" ? "ok" : "") }, [
+    el("div", {}, [document.createTextNode("Expected status: "), pill(s.status)]),
+    el("span", { text: s.status === "covered" ? fr.filter(p => p.role === "match").length + " frames show this shot. One good frame is enough for covered." : s.reason + (fr.some(p => p.role === "decoy") ? " The decoy frames must not count as a match." : "") })
+  ]);
+  $("#check-result").replaceChildren(box);
+}
+pick.addEventListener("change", () => renderCheck(+pick.value));
+pick.value = "5"; renderCheck(5);
+
+/* Step 4: report */
+const count = st => shots.filter(s => s.status === st).length;
+const mustMissing = shots.filter(s => s.must && s.status !== "covered");
+$("#rep-missing").replaceChildren(...(mustMissing.length ? mustMissing.map(s => el("div", { class: "callout" }, [el("b", { text: s.n + ". " + s.text + " (must-have): " + s.status }), el("span", { text: "In the demo shoot: " + s.reason })])) : [el("p", { text: "None. All must-have shots are covered." })]));
+for (const st of ["covered", "weak", "missing"]) $("#rep-summary").append(el("div", {}, [el("b", { text: count(st) }), pill(st)]));
+function renderDetail(n) {
+  const s = shots.find(x => x.n === n), fr = framesFor(n), d = $("#rep-detail");
+  for (const r of document.querySelectorAll("#rep-table tr.row")) r.setAttribute("aria-selected", r.dataset.n == n);
+  const kids = [el("div", { class: "tag", text: "Shot " + n + (s.must ? " · must-have" : "") + " · " + s.section }), el("h3", { text: s.text }), el("div", {}, [pill(s.status)])];
+  if (s.status === "covered") {
+    const m = fr.filter(p => p.role === "match");
+    kids.push(el("p", { class: "muted", text: "The report gives a best frame and up to 2 alternates. These are the " + m.length + " frames the manifest lists as showing this shot. Which one is best is decided by the vision check on the NAS." }));
+    kids.push(el("div", { class: "sheet" }, m.map(p => frame(p))));
+  } else {
+    kids.push(el("p", { text: "In the demo shoot: " + s.reason }));
+    const dec = fr.filter(p => p.role === "decoy");
+    if (dec.length) { kids.push(el("p", { class: "muted", text: "Decoy frames in the folder. They look close, but they must not be marked as this shot." })); kids.push(el("div", { class: "sheet" }, dec.map(p => frame(p)))); }
+  }
+  d.replaceChildren(...kids);
+}
+for (const s of shots) {
+  const b = el("button", { class: "rowbtn", type: "button", text: s.text });
+  const tr = el("tr", { class: "row", "data-n": s.n }, [el("td", { class: "num", text: s.n }), el("td", {}, b), el("td", {}, s.must ? el("span", { class: "must", text: "MUST" }) : null), el("td", {}, pill(s.status))]);
+  tr.addEventListener("click", () => renderDetail(s.n));
+  $("#rep-table tbody").append(tr);
+}
+renderDetail(5);
+
+/* Step 5: closed eyes */
+function renderEdge(edge) {
+  $("#run-full").setAttribute("aria-pressed", !edge); $("#run-edge").setAttribute("aria-pressed", edge);
+  const s = shots.find(x => x.n === 10);
+  $("#edge-sheet").replaceChildren(...framesFor(10).map(p => frame(p, edge && DATA.edgeRemoved.includes(p.file) ? "removed" : "")));
+  const st = edge ? s.edgeStatus : s.status;
+  $("#edge-result").replaceChildren(el("div", { class: "callout " + (st === "covered" ? "ok" : "warn") }, [
+    el("div", {}, [document.createTextNode("Shot 10, expected status: "), pill(st)]),
+    el("span", { text: edge ? s.edgeReason + " The shot is listed under “Missing must-have shots” with a note about closed eyes. All other shots keep their status." : "Three frames have open eyes, so there is a good frame." })
+  ]));
+}
+$("#run-full").addEventListener("click", () => renderEdge(false)); $("#run-edge").addEventListener("click", () => renderEdge(true)); renderEdge(false);
+
+/* Step 6: album */
+let answer = null;
+const covered = shots.filter(s => s.status === "covered");
+function albumReset() { $("#album-panel").hidden = true; $("#report-panel").hidden = true; $("#readonly-note").hidden = true; $("#approve").hidden = true; }
+for (const b of document.querySelectorAll("#album-choices button")) b.addEventListener("click", () => {
+  answer = b.dataset.a; albumReset();
+  for (const o of document.querySelectorAll("#album-choices button")) o.setAttribute("aria-pressed", o === b);
+  if (answer === "no") { $("#album-state").textContent = "You answered no. Nothing changed on the NAS."; return; }
+  const what = answer === "both" ? "a new album and a new report file" : answer === "album" ? "a new album" : "a new report file";
+  $("#album-state").textContent = "waiting_approval: the NAS asks for approval. What will change: " + what + ".";
+  $("#approve").hidden = false;
+});
+$("#approve").addEventListener("click", () => {
+  $("#approve").hidden = true; $("#album-state").textContent = "completed (expected result).";
+  if (answer !== "report") { $("#album-panel").hidden = false; $("#album-title").textContent = covered.length + " photos, in shot list order"; $("#album-sheet").replaceChildren(...covered.map(s => frame(framesFor(s.n).find(p => p.role === "match")))); }
+  if (answer !== "album") $("#report-panel").hidden = false;
+  $("#readonly-note").hidden = false;
+});
+
+/* Navigation */
+STEPS.forEach(([id, name], i) => { const b = el("button", { type: "button", "data-go": id }, [el("span", { class: "num", text: "0" + (i + 1) }), el("span", { class: "name", text: name })]); b.addEventListener("click", () => go(id)); $("#rail").append(el("li", {}, b)); });
+function show(id) {
+  let i = STEPS.findIndex(s => s[0] === id); if (i < 0) i = 0;
+  for (const sec of document.querySelectorAll("section.step")) sec.hidden = sec.dataset.step !== STEPS[i][0];
+  for (const b of document.querySelectorAll("#rail button")) { if (b.dataset.go === STEPS[i][0]) b.setAttribute("aria-current", "step"); else b.removeAttribute("aria-current"); }
+  $("#prev").disabled = i === 0; $("#prev").style.visibility = i === 0 ? "hidden" : "visible";
+  $("#next").textContent = i === STEPS.length - 1 ? "Start again" : "Next: " + STEPS[i + 1][1];
+  return i;
+}
+let cur = 0;
+function go(id) { cur = show(id); try { history.replaceState(null, "", "#" + STEPS[cur][0]); } catch (e) { location.hash = STEPS[cur][0]; } window.scrollTo({ top: 0 }); }
+$("#prev").addEventListener("click", () => go(STEPS[Math.max(0, cur - 1)][0]));
+$("#next").addEventListener("click", () => go(STEPS[(cur + 1) % STEPS.length][0]));
+window.addEventListener("hashchange", () => { cur = show(location.hash.slice(1)); });
+cur = show(location.hash.slice(1));
+</script>
+</body>
+</html>

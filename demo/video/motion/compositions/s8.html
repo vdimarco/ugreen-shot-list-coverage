@@ -1,0 +1,62 @@
+<template>
+  <style>
+#root { position: absolute; inset: 0; color: #eaf0f4; font-family: 'Inter', sans-serif; }
+.stage { position: absolute; inset: 0; }
+.abs { position: absolute; }
+.disp { font-family: 'Outfit', sans-serif; font-weight: 700; letter-spacing: -0.02em; }
+.mono { font-family: 'JetBrains Mono', monospace; }
+.tag { font-family: 'JetBrains Mono', monospace; font-size: 28px; letter-spacing: 0.06em; text-transform: uppercase; color: #8fa0ae; }
+.pill { display: inline-block; font-weight: 700; border-radius: 999px; padding: 6px 18px; font-size: 24px; }
+.covered { color: #6fd19c; background: #12382a; }
+.weak { color: #f0c36a; background: #3d2f0c; }
+.missing { color: #ff9b93; background: #45191a; }
+.frame { position: absolute; background: #05080b; padding: 8px 8px 30px; border-radius: 4px; box-shadow: 0 10px 30px rgba(0,0,0,.45); }
+.frame img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.frame span { position: absolute; left: 8px; bottom: 4px; font-family: 'JetBrains Mono', monospace; font-size: 18px; color: #dfe6ec; }
+.panel { position: absolute; background: #162029; border: 2px solid #2f3c48; border-radius: 14px; }
+.paper { position: absolute; background: #f3f1ea; color: #17212b; border-radius: 6px; box-shadow: 0 20px 60px rgba(0,0,0,.5); }
+.w { display: inline-block; }
+</style>
+  <div id="root" data-composition-id="s8" data-width="1920" data-height="1080">
+    <div id="s8-stage" class="clip stage" data-start="0" data-duration="8.4" data-track-index="0">
+
+      <div class="panel" id="s8-ask" style="left:120px;top:90px;width:1100px;height:170px">
+        <div class="abs mono" style="left:30px;top:20px;font-size:18px;color:#f5e3a3">ILLUSTRATION · EXPECTED FLOW</div>
+        <div class="abs" style="left:30px;top:58px;font-size:34px;line-height:1.3;width:1040px">Make an album with the best frames and save this report in the shoot folder?</div></div>
+      <div class="abs disp" id="s8-btn" style="left:1270px;top:110px;width:420px;height:130px;border-radius:20px;border:3px solid #62c3e4;color:#62c3e4;font-size:44px;line-height:124px;text-align:center">Album and report</div>
+      <div class="abs disp" id="s8-btn2" style="left:1270px;top:110px;width:420px;height:130px;border-radius:20px;border:3px solid #62c3e4;background:#62c3e4;color:#06222d;font-size:44px;line-height:124px;text-align:center">Approved</div>
+      <div class="panel" id="s8-album" style="left:120px;top:300px;width:1660px;height:480px">
+        <div class="abs disp" style="left:40px;top:26px;font-size:36px;white-space:nowrap">Album · Rivera-Okoro engagement party shot list</div>
+        <div class="abs mono" id="s8-cnt" style="right:40px;top:34px;font-size:26px;color:#6fd19c">0 photos</div>
+        <div class="frame s8-a" id="s8-a0" style="left:40px;top:96px;width:182px;height:149px"><img src="assets/photos/IMG_2001.jpg" alt=""><span data-layout-ignore>IMG_2001.jpg</span></div><div class="frame s8-a" id="s8-a1" style="left:238px;top:96px;width:182px;height:149px"><img src="assets/photos/IMG_2002.jpg" alt=""><span data-layout-ignore>IMG_2002.jpg</span></div><div class="frame s8-a" id="s8-a2" style="left:436px;top:96px;width:182px;height:149px"><img src="assets/photos/IMG_2008.jpg" alt=""><span data-layout-ignore>IMG_2008.jpg</span></div><div class="frame s8-a" id="s8-a3" style="left:634px;top:96px;width:182px;height:149px"><img src="assets/photos/IMG_2015.jpg" alt=""><span data-layout-ignore>IMG_2015.jpg</span></div><div class="frame s8-a" id="s8-a4" style="left:832px;top:96px;width:182px;height:149px"><img src="assets/photos/IMG_2013.jpg" alt=""><span data-layout-ignore>IMG_2013.jpg</span></div><div class="frame s8-a" id="s8-a5" style="left:1030px;top:96px;width:182px;height:149px"><img src="assets/photos/IMG_2021.jpg" alt=""><span data-layout-ignore>IMG_2021.jpg</span></div><div class="frame s8-a" id="s8-a6" style="left:1228px;top:96px;width:182px;height:149px"><img src="assets/photos/IMG_2022.jpg" alt=""><span data-layout-ignore>IMG_2022.jpg</span></div><div class="frame s8-a" id="s8-a7" style="left:1426px;top:96px;width:182px;height:149px"><img src="assets/photos/IMG_2029.jpg" alt=""><span data-layout-ignore>IMG_2029.jpg</span></div><div class="frame s8-a" id="s8-a8" style="left:40px;top:286px;width:182px;height:149px"><img src="assets/photos/IMG_2027.jpg" alt=""><span data-layout-ignore>IMG_2027.jpg</span></div><div class="frame s8-a" id="s8-a9" style="left:238px;top:286px;width:182px;height:149px"><img src="assets/photos/IMG_2035.jpg" alt=""><span data-layout-ignore>IMG_2035.jpg</span></div><div class="frame s8-a" id="s8-a10" style="left:436px;top:286px;width:182px;height:149px"><img src="assets/photos/IMG_2037.jpg" alt=""><span data-layout-ignore>IMG_2037.jpg</span></div><div class="frame s8-a" id="s8-a11" style="left:634px;top:286px;width:182px;height:149px"><img src="assets/photos/IMG_2036.jpg" alt=""><span data-layout-ignore>IMG_2036.jpg</span></div><div class="frame s8-a" id="s8-a12" style="left:832px;top:286px;width:182px;height:149px"><img src="assets/photos/IMG_2003.jpg" alt=""><span data-layout-ignore>IMG_2003.jpg</span></div><div class="frame s8-a" id="s8-a13" style="left:1030px;top:286px;width:182px;height:149px"><img src="assets/photos/IMG_2052.jpg" alt=""><span data-layout-ignore>IMG_2052.jpg</span></div><div class="frame s8-a" id="s8-a14" style="left:1228px;top:286px;width:182px;height:149px"><img src="assets/photos/IMG_2049.jpg" alt=""><span data-layout-ignore>IMG_2049.jpg</span></div><div class="frame s8-a" id="s8-a15" style="left:1426px;top:286px;width:182px;height:149px"><img src="assets/photos/IMG_2046.jpg" alt=""><span data-layout-ignore>IMG_2046.jpg</span></div>
+      </div>
+      <div class="abs mono" id="s8-file" style="left:120px;top:806px;font-size:26px;color:#c7d2db;background:#22303c;border-radius:10px;padding:12px 22px;white-space:nowrap">Saved: Rivera-Okoro engagement party shot list coverage.md</div>
+      <div class="abs disp" id="s8-safe" style="left:1150px;top:796px;width:680px;text-align:right;font-size:50px;color:#6fd19c;white-space:nowrap">It never changes a photo.</div>
+
+    </div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const END = 8.4;
+
+      tl.fromTo(["#s8-ask", "#s8-btn"], { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.4, ease: "expo.out", stagger: 0.08 }, 0.1);
+      tl.fromTo("#s8-btn", { scale: 1 }, { scale: 0.93, duration: 0.1, ease: "power2.in" }, 1.25);
+      tl.to("#s8-btn", { opacity: 0, duration: 0.08 }, 1.35);
+      tl.fromTo("#s8-btn2", { opacity: 0, scale: 0.93 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2)" }, 1.35);
+      tl.fromTo("#s8-album", { opacity: 0, y: 80, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "expo.out" }, 1.7);
+      const rot = [-8, 6, -4, 9, -6, 3, -9, 7, 5, -7, 8, -3, 6, -5, 4, -8];
+      document.querySelectorAll(".s8-a").forEach((el, k) => {
+        tl.fromTo(el, { opacity: 0, y: -260, scale: 1.5, rotation: rot[k] * 2 }, { opacity: 1, y: 0, scale: 1, rotation: 0, duration: 0.4, ease: "power4.out" }, 2.2 + k * 0.14);
+      });
+      const c = { v: 0 };
+      tl.fromTo(c, { v: 0 }, { v: 16, duration: 16 * 0.14, ease: "none", onUpdate: () => { document.getElementById("s8-cnt").textContent = Math.round(c.v) + " photos, in shot list order"; } }, 2.4);
+      tl.fromTo("#s8-file", { opacity: 0, x: -80 }, { opacity: 1, x: 0, duration: 0.4, ease: "expo.out" }, 4.7);
+      tl.fromTo("#s8-safe", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.3, ease: "power4.out" }, 6.2);
+
+      tl.to("#s8-stage > *", { opacity: 0, filter: "blur(10px)", duration: 0.28, ease: "power3.in" }, END - 0.3);
+
+      window.__timelines["s8"] = tl;
+    })();
+  </script>
+</template>

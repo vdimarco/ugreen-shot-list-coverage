@@ -39,6 +39,26 @@ python3 demo/video/build_concept_video.py demo/video/narration demo/video/shot-l
 
 Needs Python with Pillow, `ffmpeg`, and `pdftoppm`.
 
+## Motion-graphics version (`shot-list-coverage-motion.mp4`)
+
+`shot-list-coverage-motion.mp4`: 1920 x 1080, 30 fps, 93 seconds. It uses the same 9 narration files, the same photos, and the same expected report as the concept preview, with animated scenes built in HyperFrames (HTML and GSAP rendered to video). It has no music. `shot-list-coverage-motion-storyboard.jpg` shows 12 frames.
+
+**It is also a concept preview, not a recording of the Skill on a UGREEN AI NAS.** A label on every frame says: "Concept preview. AI-generated photos, fictional people. Expected report shown. Not a recording on a UGREEN AI NAS."
+
+The project is in `motion/`. `motion/build.py` writes `index.html` and `compositions/s1.html` to `s9.html`.
+
+```bash
+cd demo/video/motion && npx hyperframes check
+```
+
+```bash
+cd demo/video/motion && npx hyperframes render -o ../shot-list-coverage-motion.mp4
+```
+
+Needs Node.js and `ffmpeg`. The first run downloads the HyperFrames CLI.
+
+A clickable walkthrough with the same content is in `../interactive/index.html`. Open the file in a browser. `../interactive/build.py` rebuilds it from the shot list, the expected CSV files, and the manifest.
+
 ## Final Round 2 video (to record on the test day)
 
 The rules require a public YouTube video of no more than 3 minutes, with English narration or English subtitles, that shows the Skill running on **your assigned UGREEN AI NAS** during your assigned testing day.
